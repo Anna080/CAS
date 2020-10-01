@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'cas',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,9 +48,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'cas.middleware.CASMiddleware',
 ]
 
 ROOT_URLCONF = 'testcas.urls'
+
+CAS_SERVER_URL = "https://cas.u-pem.fr/"
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'cas.backends.CASBackend',
+)
 
 TEMPLATES = [
     {
@@ -68,6 +77,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'testcas.wsgi.application'
+
+CAS_GATEWAY = True
 
 
 # Database
